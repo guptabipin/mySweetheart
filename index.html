@@ -163,7 +163,7 @@
         >
           Yes 💕
         </button>
-        <button class="no" id="noBtn" onclick="handleNo()">No 🙈</button>
+        <button class="no" id="noBtn" onmouseover="handleNo()">No 🙈</button>
       </div>
       <p
           id="noMessage"
@@ -180,7 +180,7 @@
     <script>
       const noBtn = document.getElementById("noBtn");
 
-      noBtn.addEventListener("click", moveButton);
+      noBtn.addEventListener("mouseover", moveButton);
       noBtn.addEventListener("click", moveButton);
 
       function moveButton() {
