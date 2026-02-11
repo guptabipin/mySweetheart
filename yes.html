@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gifts for You ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+      }
+
+      .heart {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 20px;
+        animation: float 6s infinite ease-in;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) scale(1);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .realistic {
+        width: 160px;
+        height: 160px;
+        position: relative;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: transform 0.4s ease;
+      }
+
+      .realistic:hover {
+        transform: translateY(-10px) scale(1.05);
+      }
+
+      .lid {
+        position: absolute;
+        width: 100%;
+        height: 45px;
+        top: 0;
+        background: linear-gradient(145deg, #d94f6b, #b93550);
+        border-radius: 6px 6px 4px 4px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+      }
+
+      .box {
+        position: absolute;
+        width: 100%;
+        height: 120px;
+        bottom: 0;
+        background: linear-gradient(145deg, #c4415c, #a82f46);
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Ribbon */
+      .ribbon-vertical {
+        position: absolute;
+        width: 22px;
+        height: 100%;
+        background: linear-gradient(to bottom, #f5c6d6, #e4a9be);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .ribbon-horizontal {
+        position: absolute;
+        width: 100%;
+        height: 22px;
+        background: linear-gradient(to right, #f5c6d6, #e4a9be);
+        top: 20px;
+      }
+
+      /* Bow */
+      .bow {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background: #f5c6d6;
+        border-radius: 50%;
+        left: 50%;
+        top: 10px;
+        transform: translateX(-50%);
+      }
+
+      .bow::before,
+      .bow::after {
+        content: "";
+        position: absolute;
+        width: 28px;
+        height: 18px;
+        background: #f5c6d6;
+        border-radius: 50%;
+        top: 2px;
+      }
+
+      .bow::before {
+        left: -22px;
+        transform: rotate(-20deg);
+      }
+
+      .bow::after {
+        right: -22px;
+        transform: rotate(20deg);
+      }
+
+      .container {
+        background: white;
+        padding: 40px 30px;
+        width: 90%;
+        max-width: 900px;
+        text-align: center;
+        border-radius: 6px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      h1 {
+        font-size: 36px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: #b44;
+      }
+
+      .subtext {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #b44;
+      }
+
+      .gifts {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .gift {
+        width: 160px;
+        height: 160px;
+        background: #b44;
+        border-radius: 6px;
+        position: relative;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .gift:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      }
+      .gift::before {
+        width: 22px;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .gift::after {
+        width: 100%;
+        height: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      /* Modal */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-box {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        text-align: center;
+        animation: pop 0.4s ease;
+      }
+
+      .modal-box h2,
+      .modal-box p {
+        margin-bottom: 10px;
+        color: #b44;
+      }
+
+      .modal-box p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .modal {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .modal-gif {
+        width: 120px;
+        margin: 10px auto;
+        display: block;
+        animation: floatIn 0.8s ease forwards;
+      }
+
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 10px auto;
+        border: 3px solid #ff7eb3;
+      }
+
+      .close {
+        margin-top: 20px;
+        padding: 8px 18px;
+        border: none;
+        border-radius: 20px;
+        background: #b44;
+        color: white;
+        cursor: pointer;
+      }
+
+      @keyframes pop {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .photo-wrap {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 15px auto;
+      }
+
+      .modal-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ff7eb3;
+        z-index: 2;
+        position: relative;
+      }
+
+      /* Hearts */
+      .heart {
+        position: absolute;
+        font-size: 16px;
+        animation: orbit 3s infinite linear;
+        opacity: 0.9;
+      }
+
+      .h1 {
+        top: -10px;
+        left: 20px;
+        animation-delay: 0s;
+      }
+      .h2 {
+        right: -10px;
+        top: 30px;
+        animation-delay: 1s;
+      }
+      .h3 {
+        left: 30px;
+        bottom: -10px;
+        animation-delay: 2s;
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.8);
+          opacity: 0.6;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Floating Hearts -->
+    <div class="heart" style="left: 10%">❤️</div>
+    <div class="heart" style="left: 30%; animation-delay: 1s">💖</div>
+    <div class="heart" style="left: 50%; animation-delay: 2s">❤️</div>
+    <div class="heart" style="left: 70%; animation-delay: 3s">💞</div>
+    <div class="heart" style="left: 90%; animation-delay: 4s">❤️</div>
+
+    <div class="container">
+      <h1>GIFTS FOR YOU!</h1>
+      <p class="subtext">CLICK ANY GIFT TO OPEN</p>
+
+      <div class="gifts">
+        <div class="realistic" onclick="openGift(0)">
+          <div class="lid">
+            <div class="bow"></div>
+          </div>
+          <div class="box">
+            <div class="ribbon-vertical"></div>
+            <div class="ribbon-horizontal"></div>
+          </div>
+        </div>
+
+        <div class="realistic" onclick="openGift(1)">
+          <div class="lid">
+            <div class="bow"></div>
+          </div>
+          <div class="box">
+            <div class="ribbon-vertical"></div>
+            <div class="ribbon-horizontal"></div>
+          </div>
+        </div>
+
+        <div class="realistic" onclick="openGift(2)">
+          <div class="lid">
+            <div class="bow"></div>
+          </div>
+          <div class="box">
+            <div class="ribbon-vertical"></div>
+            <div class="ribbon-horizontal"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+      <div class="modal-box">
+        <h2 id="modalTitle"></h2>
+        <img id="modalGif" src="" alt="cute gif" class="modal-gif" />
+
+        <div class="photo-wrap">
+          <img id="modalPhoto" src="" class="modal-photo" />
+          <span class="heart h1">❤️</span>
+          <span class="heart h2">💖</span>
+          <span class="heart h3">💕</span>
+        </div>
+        <p id="modalText"></p>
+        <button class="close" onclick="closeModal()">Close ❤️</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const gifts = [
+      {
+        title: "A Small Truth ❤️",
+        text: "Santu, you are my strength 💪🏼 in tough times and my happiness in good times. Thank you 😊 for being my biggest support and the most wonderful wife. I promise to always value and respect you 💖",
+        gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VwaHVmY2pmbWVsMm1uZ3FvMm5nZHptZTEyaGVzN3RoMXZqemFqdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ie4CIIvQS0bk3zwZlM/giphy.gif",
+        photo: "truth.jpg",
+      },
+      {
+        title: "A Promise 💕",
+        text: "With all my heart ❤️, I promise 🤞🏻 that my love ❤️ for you will never fade. It will grow stronger 💪🏼 with every sunrise we see together.",
+        gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dGNrbDl4eWk4cWF4bzk5dHo0ODhzYXdqNTJhcmZubTJyeXgyNHpjOSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/IzXiddo2twMmdmU8Lv/giphy.gif",
+        photo: "promise.jpg",
+      },
+      {
+        title: "My Heart 💍",
+        text: "Santu, before you came into my life 🌏, I did not know what true love ❤️ felt like. You changed my world 🌏 quietly, and now my life feels complete only because of you ❤️ ",
+        gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dGNrbDl4eWk4cWF4bzk5dHo0ODhzYXdqNTJhcmZubTJyeXgyNHpjOSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/SYo1DFS8NLhhqzzjMU/giphy.gif",
+        photo: "love.jpg",
+      },
+    ];
+
+    function openGift(index, element) {
+      // Safety check
+      if (element) {
+        element.classList.add("open");
+      }
+
+      setTimeout(() => {
+        const titleEl = document.getElementById("modalTitle");
+        const textEl = document.getElementById("modalText");
+        const gif = document.getElementById("modalGif");
+        const photo = document.getElementById("modalPhoto");
+        const photoWrap = document.querySelector(".photo-wrap");
+
+        // Set text
+        titleEl.innerText = gifts[index].title;
+        textEl.innerText = gifts[index].text;
+
+        // GIF handling
+        if (gifts[index].gif) {
+          gif.src = gifts[index].gif;
+          gif.style.display = "block";
+        } else {
+          gif.style.display = "none";
+          gif.src = "";
+        }
+
+        // Photo handling
+        if (gifts[index].photo) {
+          photo.src = gifts[index].photo;
+          photo.style.display = "block";
+          if (photoWrap) photoWrap.style.display = "block";
+        } else {
+          photo.style.display = "none";
+          photo.src = "";
+          if (photoWrap) photoWrap.style.display = "none";
+        }
+
+        // Open modal
+        document.getElementById("modal").classList.add("active");
+      }, 200); // wait for lid animation
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("active");
+    }
+
+    const photoWrap = document.querySelector(".photo-wrap");
+    photoWrap.style.display = gifts[index].photo ? "block" : "none";
+  </script>
+</html>
